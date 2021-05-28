@@ -1,4 +1,6 @@
-def standard_column_names(dataframe):
+import pandas as pd
+
+def standard_column_names(dataframe: pd.DataFrame):
     """
         Edit column names, remove space and replace with underline,
         then set column names lowercase -> snake_case
@@ -17,7 +19,7 @@ def standard_column_names(dataframe):
     return dataframe.columns.str.replace(" ", "_").str.lower()
 
 
-def standard_features_string(dataframe):
+def standard_features_string(dataframe: pd.DataFrame):
     """ 
         Edit feature names in each categotical column,
         first check each column, if that was categorical, 
@@ -43,7 +45,37 @@ def standard_features_string(dataframe):
     return dataframe
 
 
-def get_feature_names_mixture_column_transformer(mixture_transformer, cat_features, numerical_name, categorical_name):
+def get_feature_names_mixture_column_transformer(mixture_transformer,
+                                                 cat_features,
+                                                 numerical_name,
+                                                 categorical_name):
+    """ 
+        Extract all feature(column) names and return a list that contains
+        all the features after transforms, length of this list is equal to
+        numpy array that transformed via column transformer.
+        default column tranformer -> categorical and numerical pipeline 
+        with one-hot encoder and simple imputer.
+        
+    Parameters
+    ----------
+    mixture_transformer : sklearn ColumnTransformer
+        full column tranformer, exactly name of column transformer object 
+
+    cat_features : python list
+        list of categorical features
+        
+    numerical_name : python string
+        name of numerical pipeline in ColumnTransformer that we defined
+    
+    categorical_name : python string
+        name of categorical pipeline in ColumnTransformer that we defined
+            
+    Returns
+    -------
+    flat_features : python list
+        list of all features header that extract from ColumnTransformer
+    
+    """
     full_transformer = mixture_transformer.transformers_
     all_features = []
     for name, transformer, features in full_transformer:
