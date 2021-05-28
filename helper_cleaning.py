@@ -1,6 +1,8 @@
 def standard_column_names(dataframe):
-    """ Edit column names, remove space and replace with underline,
-        then set column names lowercase
+    """
+        Edit column names, remove space and replace with underline,
+        then set column names lowercase -> snake_case
+        
     Parameters
     ----------
     dataframe : pandas DataFrame
@@ -16,6 +18,23 @@ def standard_column_names(dataframe):
 
 
 def standard_features_string(dataframe):
+    """ 
+        Edit feature names in each categotical column,
+        first check each column, if that was categorical, 
+        then going to remove space and replace with underline,
+        then set feature names lowercase -> snake_case
+        
+    Parameters
+    ----------
+    dataframe : pandas DataFrame
+        DataFrame with non-standardard feature names
+
+    Returns
+    -------
+    dataframe : Pandas DataFrame
+        Edited categorical columns of Dataframe with standard names
+    
+    """
     for column in dataframe.columns:
         if dataframe[column].dtype == "object":
             dataframe[column] = dataframe[column].str.replace(" ", "_").str.lower()
