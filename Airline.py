@@ -6,12 +6,11 @@ Purpose: Airline Satisfaction Network
 
 import argparse
 
-
-
 def get_args():
     """Get the command-line arguments"""
 
-    parser = argparse.ArgumentParser(description='Say hello')
+    parser = argparse.ArgumentParser(description='Say hello',
+                                     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n',
                         '--name',
                         default='World',
